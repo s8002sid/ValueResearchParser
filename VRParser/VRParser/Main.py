@@ -7,14 +7,16 @@ def WriteFundToCSV(fund, filename):
     for i in range(0, len(keys)):
         fob.write(fund[keys[i]].CSValue() + '\n')
     fob.close();
+
 parser = Parser(
-    r'C:\Users\siddjain\Downloads\mf\snapshot.xls',
-    r'C:\Users\siddjain\Downloads\mf\returns.xls',
-    r'C:\Users\siddjain\Downloads\mf\portfolio.xls',
-    r'C:\Users\siddjain\Downloads\mf\riskStatus.xls',
-    r'C:\Users\siddjain\Downloads\mf\feesDetails.xls'
+    r'C:\Users\siddjain\Downloads\mf\VR-20180821-SmallCap\snapshot.xls',
+    r'C:\Users\siddjain\Downloads\mf\VR-20180821-SmallCap\returns.xls',
+    r'C:\Users\siddjain\Downloads\mf\VR-20180821-SmallCap\portfolio.xls',
+    r'C:\Users\siddjain\Downloads\mf\VR-20180821-SmallCap\riskStatus.xls',
+    r'C:\Users\siddjain\Downloads\mf\VR-20180821-SmallCap\feesDetails.xls'
     );
 fund = parser.GetFunds();
-fund = FilterFund.Filter(fund);
-WriteFundToCSV(fund, 'out.csv');
+fundFilter = LargeCapFundFilter();
+fund = fundFilter.Filter(fund);
+WriteFundToCSV(fund, 'C:\Users\siddjain\Downloads\mf\VR-20180821-SmallCap\out.csv');
 print(len(fund.keys()));
